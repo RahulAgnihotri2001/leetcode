@@ -16,13 +16,13 @@ public:
             for(int i=0;i<code.size();i++){
                 int x=0;
                 for(int j=1;j<=abs(k);j++){
+                    // int y=(i-j)%code.size();
                     int y=(i-j);
                     if(y<0){
                         y=y+code.size();
                     }
                     x=x+code[y];
                 }
-                cout<<"\n";
                 answer.push_back(x);
             }
         }
