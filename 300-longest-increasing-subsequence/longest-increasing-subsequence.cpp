@@ -1,26 +1,21 @@
 class Solution {
 public:
-
-    int fun(int index,int previous,vector<vector<int>> &dp,vector<int>& nums){
-        if(index>=nums.size()){
-            return 0;
-        }
-        if(dp[index][previous+1]!=-1){
-            return dp[index][previous+1];
-        }
-        int a=0;
-        if(previous==-1 || nums[index]>nums[previous]){
-            a=1+fun(index+1,index,dp,nums);
-        }
-        int b=fun(index+1,previous,dp,nums);
-        dp[index][previous+1]=max(a,b);
-        return dp[index][previous+1];
-    }
-
     int lengthOfLIS(vector<int>& nums) {
-        int previous=-1;
-        vector<vector<int>> dp(nums.size(),vector<int>(nums.size()+1,-1));
-        int index=0;
-        return fun(index,previous,dp,nums);
+        vector<int> answer; // Storing smaller count 
+        answer.push_back(0);
+        for(int i=1;i<nums.size();i++){
+            int temp=0;
+            for(int j=answer.size()-1;j>=0;j--){
+                if(nums[j]<nums[i]){
+                    temp=max(temp,answer[j]+1);
+                }
+            }
+            answer.push_back(temp);
+        }
+        int ans=0;
+        for(int i=0;i<answer.size();i++){
+            ans=max(ans,answer[i]);
+        }
+        return ans+1;
     }
 };
