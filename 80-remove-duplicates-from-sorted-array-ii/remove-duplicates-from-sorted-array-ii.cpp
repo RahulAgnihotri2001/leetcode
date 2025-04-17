@@ -1,33 +1,21 @@
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
-        int start=0;
-        int pointer=0;
-        int prev=INT_MAX;
-        int count=0;
-        int answer=0;
-        while(pointer<nums.size()){
-            if(nums[pointer]!=prev){
-                nums[start]=nums[pointer];
-                prev=nums[pointer];
+        // start from index 2 ;
+        // we are dealing with start=2 , check start-2 & start-1 
+        // if equal to nums[index] then do nothing else nums[start]=nums[index];
+        if(nums.size()<=2){
+            return nums.size();
+        }
+        int count=2;
+        int start=2;
+        for(int i=2;i<nums.size();i++){
+            if(nums[start-2] != nums[i]){
+                nums[start]=nums[i];
                 start++;
-                count=1;
-                pointer++;
-                answer++;
-            }
-            else{
-                if(count!=2){
-                    nums[start]=nums[pointer];
-                    start++;
-                    count++;
-                    pointer++;
-                    answer++;
-                }
-                else{
-                    pointer++;
-                }
+                count++;
             }
         }
-        return answer;
+    return count;
     }
 };
