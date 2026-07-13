@@ -7,7 +7,7 @@ public:
         }
         int start=2;
         for(int i=2;i<nums.size();i++){
-            if(nums[i]!= nums[start-1] || (nums[i]== nums[start-1] && nums[i]!= nums[start-2])){
+            if(nums[i]!= nums[start-2]){
                 nums[start]=nums[i];
                 start++;
             }
