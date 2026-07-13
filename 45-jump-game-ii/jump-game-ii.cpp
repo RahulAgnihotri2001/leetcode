@@ -1,21 +1,19 @@
 class Solution {
 public:
     int jump(vector<int>& nums) {
+        int jump=0;
         if(nums.size()==1){
             return 0;
         }
-        int wallet=nums[0];
-        int bank=nums[0];      // max Reach, will store index
-        int jump=1;
+        int wallet = nums[0];
+        int range = nums[0];
         for(int i=1;i<nums.size();i++){
-            wallet--;
-            bank--;
-            bank=max(bank,nums[i]);
-            if(wallet==0 && i!=nums.size()-1){
+            range = max(range, nums[i]+i);
+            if(wallet == i && i!=nums.size()-1){
                 jump++;
-                wallet=bank;
+                wallet = range;
             }
         }
-        return jump;
+        return jump+1;
     }
 };
