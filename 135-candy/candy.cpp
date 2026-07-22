@@ -1,21 +1,26 @@
 class Solution {
 public:
-    int candy(vector<int>& rat) {
-        vector<int> answer(rat.size(),1);
-        for(int i=1;i<rat.size();i++){
-            if(rat[i]>rat[i-1]){
-                answer[i]=answer[i-1]+1;
+    int candy(vector<int>& ratings) {
+        if(ratings.size()==1){
+            return 1;
+        }
+        vector<int> temp(ratings.size(),0);
+        for(int i=1;i<temp.size();i++){
+            if(ratings[i]>ratings[i-1]){
+                temp[i]=temp[i-1]+1;
             }
         }
-        for(int i=rat.size()-2;i>=0;i--){
-            if(rat[i]>rat[i+1] && answer[i]<=answer[i+1]){
-                answer[i]=answer[i+1]+1;
+        for(int i=temp.size()-2;i>=0;i--){
+            if(ratings[i]>ratings[i+1]){
+                temp[i]= max(temp[i], temp[i+1]+1);
             }
         }
-        int ans=0;
-        for(int i=0;i<answer.size();i++){
-            ans=ans+answer[i];
+        int answer=0;
+        for(int i=0;i<temp.size();i++){
+            answer=answer+temp[i];
         }
-        return ans;
+        answer=answer+temp.size();
+        return answer;
+
     }
 };
